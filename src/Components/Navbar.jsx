@@ -18,7 +18,7 @@ import { NavLink } from "react-router-dom";
 
 export const NavbarComponent = () => {
   return (
-    <Navbar className="w-11/12 mx-auto border-none">
+    <Navbar className="px-6 lg:px-20 mx-auto border-none rounded-none shadow-xl">
       <NavbarContainer>
         <NavbarBrand>
           <h4 className="text-xl lg:text-3xl text-error-400 font-bold">
