@@ -11,8 +11,41 @@ import {
   Label,
 } from "keep-react";
 import { NavLink } from "react-router-dom";
+import { useState } from "react";
+import { toast } from "react-toastify";
+import useAuth from "../Hook/useAuth";
 
 const Register = () => {
+  const { messages, setMessages } = useState(null);
+  const { createUser } = useAuth();
+  const handleRegister = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    const repassword = form.repassword.value;
+    console.log(email, password);
+
+    // check password validation
+    if (password.length < 6) {
+      return alert("Password Must be used 6 characters");
+    }
+    const checkPassword = /^(?=.*[a-z])(?=.*[A-Z])[A-Za-z\d@$!%*?&]{6,}$/;
+    if (!checkPassword.test(password)) {
+      return alert("Must be used one capital, one small letter & one number");
+    }
+    if (password !== repassword) {
+      return alert("Password not Match");
+    }
+    createUser(email, password)
+      .then((result) => {
+        console.log(result.user);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <div>
       <Card className="max-w-sm mx-auto">
@@ -27,7 +60,7 @@ const Register = () => {
             </Button>
           </div>
           <Divider>Or countinue with</Divider>
-          <form className="space-y-2">
+          <form onSubmit={handleRegister} className="space-y-2">
             <fieldset className="space-y-1">
               <Label htmlFor="name">Full Name*</Label>
               <div className="relative">
@@ -92,7 +125,7 @@ const Register = () => {
               <Label htmlFor="password">Re-Password*</Label>
               <div className="relative">
                 <Input
-                  name="re-password"
+                  name="repassword"
                   placeholder="Enter Re-password"
                   type="password"
                   className="ps-11"
