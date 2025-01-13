@@ -15,8 +15,10 @@ import {
   NavbarList,
 } from "keep-react";
 import { NavLink } from "react-router-dom";
+import useAuth from "../Hook/useAuth";
 
 export const NavbarComponent = () => {
+  const { user, signOutUser } = useAuth();
   return (
     <Navbar className="px-6 lg:px-20 mx-auto border-none rounded-none shadow-xl">
       <NavbarContainer>
@@ -32,12 +34,18 @@ export const NavbarComponent = () => {
           </NavLink>
         </NavbarList>
         <NavbarList>
-          <NavLink to="/register" className="underline">
-            Register
-          </NavLink>
-          <NavLink to="/signin">
-            <Button>Sign in</Button>
-          </NavLink>
+          {user && user.email ? (
+            <Button onClick={signOutUser}>Log Out</Button>
+          ) : (
+            <>
+              <NavLink to="/register" className="underline">
+                Register
+              </NavLink>
+              <NavLink to="/signin">
+                <Button>Sign in</Button>
+              </NavLink>
+            </>
+          )}
         </NavbarList>
         <NavbarCollapseBtn />
         <NavbarCollapse>

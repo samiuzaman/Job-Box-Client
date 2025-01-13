@@ -53,13 +53,8 @@ const Register = () => {
           <CardHeader>
             <CardTitle className="text-center">Register Now</CardTitle>
           </CardHeader>
-          <div className="flex items-center justify-between gap-3">
-            <Button variant="outline" color="secondary" className="w-full">
-              <GoogleLogo size={20} className="mr-1.5" />
-              Signin with Google
-            </Button>
-          </div>
-          <Divider>Or countinue with</Divider>
+
+          <Divider></Divider>
           <form onSubmit={handleRegister} className="space-y-2">
             <fieldset className="space-y-1">
               <Label htmlFor="name">Full Name*</Label>

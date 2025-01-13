@@ -11,8 +11,36 @@ import {
   Label,
 } from "keep-react";
 import { NavLink } from "react-router-dom";
+import useAuth from "../Hook/useAuth";
 
 const Signin = () => {
+  const { signInUser, signinWithGoogle } = useAuth();
+  const handleSignIn = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    console.log(email, password);
+    signInUser(email, password)
+      .then((result) => {
+        console.log(result.user);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  // Sign in With Google
+  const handlesignInWithGoogle = () => {
+    signinWithGoogle()
+      .then((result) => {
+        console.log(result.user);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <div>
       <Card className="max-w-sm mx-auto">
@@ -21,13 +49,18 @@ const Signin = () => {
             <CardTitle className="text-center">Sign In Now</CardTitle>
           </CardHeader>
           <div className="flex items-center justify-between gap-3">
-            <Button variant="outline" color="secondary" className="w-full">
+            <Button
+              onClick={handlesignInWithGoogle}
+              variant="outline"
+              color="secondary"
+              className="w-full"
+            >
               <GoogleLogo size={20} className="mr-1.5" />
               Signin with Google
             </Button>
           </div>
           <Divider>Or countinue with</Divider>
-          <form className="space-y-2">
+          <form onSubmit={handleSignIn} className="space-y-2">
             <fieldset className="space-y-1">
               <Label htmlFor="email">Email*</Label>
               <div className="relative">
