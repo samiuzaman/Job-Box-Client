@@ -2,7 +2,7 @@ import BannerImg from "../../assets/banner.png";
 import { motion } from "motion/react";
 const Banner = () => {
   return (
-    <div className="flex justify-between ">
+    <div className="flex justify-between">
       <div className="w-1/2 py-12">
         <h2 className="text3xl lg:text-6xl font-bold text-metal-800 mb-6">
           Get The <span className="text-primary-500">Right Job</span> You
@@ -15,7 +15,7 @@ const Banner = () => {
       </div>
       <div>
         <motion.img
-          animate={{ y: [0, 50, 0] }}
+          animate={{ y: [20, 60, 20] }}
           transition={{ duration: 5, repeat: Infinity }}
           className="w-96"
           src={BannerImg}
