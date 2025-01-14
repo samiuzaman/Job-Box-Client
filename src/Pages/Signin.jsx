@@ -10,11 +10,14 @@ import {
   InputIcon,
   Label,
 } from "keep-react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../Hook/useAuth";
 
 const Signin = () => {
   const { signInUser, signinWithGoogle } = useAuth();
+  const location = useLocation();
+  console.log(location);
+  const navigate = useNavigate();
   const handleSignIn = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -24,6 +27,7 @@ const Signin = () => {
     signInUser(email, password)
       .then((result) => {
         console.log(result.user);
+        navigate(location?.state ? location?.state : "/");
       })
       .catch((error) => {
         console.log(error);
@@ -35,6 +39,7 @@ const Signin = () => {
     signinWithGoogle()
       .then((result) => {
         console.log(result.user);
+        navigate(location?.state ? location?.state : "/");
       })
       .catch((error) => {
         console.log(error);
