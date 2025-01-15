@@ -32,6 +32,12 @@ export const NavbarComponent = () => {
           <NavLink to="/">
             <NavbarItem>Home</NavbarItem>
           </NavLink>
+          <NavLink to="/myapplications">
+            <NavbarItem>My Application</NavbarItem>
+          </NavLink>
+          <NavLink to="/addjob">
+            <NavbarItem>Add Job</NavbarItem>
+          </NavLink>
         </NavbarList>
         <NavbarList>
           {user && user.email ? (

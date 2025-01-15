@@ -26,7 +26,7 @@ const HotJobCard = ({ job }) => {
   } = job;
   return (
     <div>
-      <Card className="py-2 h-full">
+      <Card className="flex flex-col py-2 h-full">
         <CardHeader className="flex items-center gap-3 px-5 pt-3">
           <img
             src={company_logo}
@@ -58,9 +58,9 @@ const HotJobCard = ({ job }) => {
           <div>
             <p>
               <span className="text-xl text-primary-700 font-medium">
-                {salaryRange.min} {salaryRange.max} /
+                {salaryRange?.min} {salaryRange?.max} /
               </span>
-              {salaryRange.currency}
+              {salaryRange?.currency}
             </p>
           </div>
           <Link to={`/jobdetails/${_id}`}>
