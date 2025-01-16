@@ -54,6 +54,14 @@ const Routes = createBrowserRouter([
         ),
       },
       {
+        path: "/mypostedjob",
+        element: (
+          <PrivetRoute>
+            <MyPostJob></MyPostJob>
+          </PrivetRoute>
+        ),
+      },
+      {
         path: "/signin",
         element: <Signin></Signin>,
       },
