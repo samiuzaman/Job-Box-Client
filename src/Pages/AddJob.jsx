@@ -11,7 +11,6 @@ import {
   Textarea,
 } from "keep-react";
 
-import { useState } from "react";
 import Swal from "sweetalert2";
 import useAuth from "../Hook/useAuth";
 import { useNavigate } from "react-router-dom";
@@ -22,7 +21,34 @@ const AddJob = () => {
 
   const handleAddjob = (event) => {
     event.preventDefault();
-    
+    const formData = new FormData(event.target);
+    console.log(formData.entries());
+    const initialData = Object.fromEntries(formData.entries());
+    const { min, max, currency, ...newJob } = initialData;
+    newJob.salaryRange = { min, max, currency };
+    newJob.requirements = newJob.requirements.split("\n");
+    newJob.responsibilities = newJob.responsibilities.split("\n");
+    console.log(newJob);
+    fetch("http://localhost:5000/jobs", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(newJob),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.acknowledged) {
+          Swal.fire({
+            position: "top-center",
+            icon: "success",
+            title: "Your Job has been Added",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+      });
   };
 
   return (
@@ -182,7 +208,12 @@ const AddJob = () => {
             <fieldset className="space-y-1">
               <Label htmlFor="customizatin">HR Name</Label>
               <div>
-                <Input type="text" name="hr_name" placeholder="HR Name" />
+                <Input
+                  type="text"
+                  name="hr_name"
+                  defaultValue={user?.displayName}
+                  placeholder="HR Name"
+                />
               </div>
             </fieldset>
             <fieldset className="space-y-1">
