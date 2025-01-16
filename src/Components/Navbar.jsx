@@ -38,6 +38,9 @@ export const NavbarComponent = () => {
           <NavLink to="/addjob">
             <NavbarItem>Add Job</NavbarItem>
           </NavLink>
+          <NavLink to="/mypostedjob">
+            <NavbarItem>My Posted Job</NavbarItem>
+          </NavLink>
         </NavbarList>
         <NavbarList>
           {user && user.email ? (
